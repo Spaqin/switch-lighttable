@@ -25,11 +25,11 @@ uint32_t get_actions()
     {
         action_vector |= SET_GREEN;
     }
-    if(KEY_X & kHeld)
+    if(KEY_Y & kHeld)
     {
         action_vector |= SET_RED;
     }
-    if(KEY_Y & kHeld)
+    if(KEY_X & kHeld)
     {
         action_vector |= SET_BRIGHTNESS;
     }

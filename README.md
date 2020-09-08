@@ -5,10 +5,10 @@ Uses OpenGL. Why? CV-driven development.
 
 # Controls
 
-* X, B, A - increase amount of red, green, blue.
-* R + X, B, A - decrease amount of red, green, blue.
-* Y - increase brightness.
-* R + Y - decrease brightness.
+* Y, B, A - increase amount of red, green or blue.
+* R + Y, B, A - decrease amount of red, green, blue.
+* X - increase brightness.
+* R + X - decrease brightness.
 
 * Up, Down, Left, Right - presets. 
 * Held U/D/L/R - preset overwrite with current setting.
