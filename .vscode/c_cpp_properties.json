@@ -1,15 +1,35 @@
 {
     "configurations": [
         {
-            "name": "Linux",
+            "name": "DKP Aarch64",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/inc",
+
+                "${workspaceFolder}/**",
+
+                "${DEVKITPRO}/libnx/include",
+                "${DEVKITPRO}/portlibs/switch/include",
+
+                "${DEVKITPRO}/devkitA64/aarch64-none-elf/include",
+                "${DEVKITPRO}/devkitA64/lib/gcc/aarch64-none-elf/*/include",
+
+                "/usr/include",
+                "/usr/include/x86_64-linux-gnu"
             ],
-            "defines": [],
-            "compilerPath": "/usr/bin/gcc",
+            "defines": [
+                "__aarch64__",
+                "__SWITCH__",
+                "DEBUG",
+                "TWILI",
+                "VERSION=\"0.0.0\"",
+                "COMMIT=\"0000000\"",
+                "ATMOSPHERE_IS_STRATOSPHERE",
+                "ATMOSPHERE_BOARD_NINTENDO_SWITCH"
+            ],
+            "compilerPath": "${DEVKITPRO}/devkitA64/bin/aarch64-none-elf-gcc",
             "cStandard": "gnu11",
-            "cppStandard": "gnu++14",
-            "intelliSenseMode": "clang-x64"
+            "cppStandard": "gnu++20",
+            "intelliSenseMode": "gcc-arm64"
         }
     ],
     "version": 4
