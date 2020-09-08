@@ -15,7 +15,7 @@ typedef enum {
     PRESET_DOWN = 0x800,
     SET_PRESET_MODIFIER = 0x1000, //if held, this is also lit up, so we know whether to load a preset, or save one.
     TOGGLE_SETTINGS = 0x8000
-}Action;
+} Action;
 
 //separate getting the actions from pressed buttons which may be platform-dependent, from actually doing stuff.
 uint32_t get_actions();
