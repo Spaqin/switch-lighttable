@@ -1,6 +1,55 @@
-#include "inc/graphics.h"
+#include "graphics.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #define nullptr NULL
+
+//-----------------------------------------------------------------------------
+// nxlink support
+//-----------------------------------------------------------------------------
+
+#ifndef ENABLE_NXLINK
+#define TRACE(fmt,...) ((void)0)
+#else
+#include <unistd.h>
+#define TRACE(fmt,...) printf("%s: " fmt "\n", __PRETTY_FUNCTION__, ## __VA_ARGS__)
+
+static int s_nxlinkSock = -1;
+
+void initNxLink()
+{
+    if (R_FAILED(socketInitializeDefault()))
+        return;
+
+    s_nxlinkSock = nxlinkStdio();
+    if (s_nxlinkSock >= 0)
+        TRACE("printf output now goes to nxlink server");
+    else
+        socketExit();
+}
+
+void deinitNxLink()
+{
+    if (s_nxlinkSock >= 0)
+    {
+        close(s_nxlinkSock);
+        socketExit();
+        s_nxlinkSock = -1;
+    }
+}
+
+extern "C" void userAppInit()
+{
+    initNxLink();
+}
+
+extern "C" void userAppExit()
+{
+    deinitNxLink();
+}
+
+#endif
 
 //Global variables
 
@@ -44,7 +93,7 @@ static const char* const fragmentShaderSource = "text(\
 // EGL initialization
 //-----------------------------------------------------------------------------
 
-static bool initEgl(NWindow* win)
+bool initEgl(NWindow* win)
 {
     // Connect to the EGL default display
     s_display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
@@ -122,7 +171,7 @@ _fail0:
     return false;
 }
 
-static void deinitEgl()
+void deinitEgl()
 {
     if (s_display)
     {
@@ -146,7 +195,7 @@ static void deinitEgl()
 // Main program
 //-----------------------------------------------------------------------------
 
-static void setMesaConfig()
+void setMesaConfig()
 {
     // Uncomment below to disable error checking and save CPU time (useful for production):
     //setenv("MESA_NO_ERROR", "1", 1);
@@ -164,7 +213,7 @@ static void setMesaConfig()
 
 
 
-static GLuint createAndCompileShader(GLenum type, const char* source)
+GLuint createAndCompileShader(GLenum type, const char* source)
 {
     GLint success;
     GLchar msg[512];
@@ -191,7 +240,7 @@ static GLuint createAndCompileShader(GLenum type, const char* source)
 }
 
 
-static void sceneInit()
+void sceneInit()
 {
     GLint vsh = createAndCompileShader(GL_VERTEX_SHADER, vertexShaderSource);
     GLint fsh = createAndCompileShader(GL_FRAGMENT_SHADER, fragmentShaderSource);
@@ -243,7 +292,7 @@ static void sceneInit()
     glBindVertexArray(0);
 }
 
-static void sceneRender()
+void sceneRender()
 {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -254,14 +303,14 @@ static void sceneRender()
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
-static void sceneExit()
+void sceneExit()
 {
     glDeleteBuffers(1, &s_vbo);
     glDeleteVertexArrays(1, &s_vao);
     glDeleteProgram(s_program);
 }
 
-static void swapBuffers()
+void swapBuffers()
 {
     eglSwapBuffers(s_display, s_surface);
 }

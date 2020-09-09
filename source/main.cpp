@@ -3,54 +3,8 @@
 #include <string.h>
 #include <switch.h>
 
-#include "inc/graphics.h"
-
-
-//-----------------------------------------------------------------------------
-// nxlink support
-//-----------------------------------------------------------------------------
-
-#ifndef ENABLE_NXLINK
-#define TRACE(fmt,...) ((void)0)
-#else
-#include <unistd.h>
-#define TRACE(fmt,...) printf("%s: " fmt "\n", __PRETTY_FUNCTION__, ## __VA_ARGS__)
-
-static int s_nxlinkSock = -1;
-
-static void initNxLink()
-{
-    if (R_FAILED(socketInitializeDefault()))
-        return;
-
-    s_nxlinkSock = nxlinkStdio();
-    if (s_nxlinkSock >= 0)
-        TRACE("printf output now goes to nxlink server");
-    else
-        socketExit();
-}
-
-static void deinitNxLink()
-{
-    if (s_nxlinkSock >= 0)
-    {
-        close(s_nxlinkSock);
-        socketExit();
-        s_nxlinkSock = -1;
-    }
-}
-
-extern "C" void userAppInit()
-{
-    initNxLink();
-}
-
-extern "C" void userAppExit()
-{
-    deinitNxLink();
-}
-
-#endif
+#include "graphics.h"
+#include "actions.h"
 
 
 int main(int argc, char* argv[])
@@ -72,10 +26,8 @@ int main(int argc, char* argv[])
     while (appletMainLoop())
     {
         // Get and process input
-        hidScanInput();
-        u32 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
-        if (kDown & KEY_PLUS)
-            break;
+        uint32_t actions = get_actions();
+        act(actions);
 
         // Render stuff!
         sceneRender();

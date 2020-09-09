@@ -17,7 +17,8 @@ Presets are written to a text file /switch/lighttable/presets.ini, so you can mo
 * Up, left and right is brightest, whitest; 
 * Down is least bright, black, to save power.
 
-* + - toggle display of parameters.
+* \+ - toggle display of parameters.
+* \- - exit
 
 # Todo, or other dumb ideas
 

@@ -8,16 +8,16 @@
 #include <glad/glad.h>  // glad library (OpenGL loader)
 
 
-static bool initEgl(NWindow* win);
-static void deinitEgl();
-static void setMesaConfig();
+bool initEgl(NWindow* win);
+void deinitEgl();
+void setMesaConfig();
 
-static GLuint createAndCompileShader(GLenum type, const char* source);
-static void sceneInit();
-static void sceneRender();
-static void sceneExit();
+GLuint createAndCompileShader(GLenum type, const char* source);
+void sceneInit();
+void sceneRender();
+void sceneExit();
 
-static void swapBuffers();
+void swapBuffers();
 
 typedef struct 
 {

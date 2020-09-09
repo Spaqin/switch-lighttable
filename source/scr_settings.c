@@ -1,5 +1,5 @@
-#include "inc/scr_settings.h"
-#include "inc/actions.h"
+#include "scr_settings.h"
+#include "actions.h"
 
 
 bool _brightness_changed = false;

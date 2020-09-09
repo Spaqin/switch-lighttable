@@ -1,4 +1,4 @@
-#include "inc/actions.h"
+#include "actions.h"
 
 #include <switch.h>
 
