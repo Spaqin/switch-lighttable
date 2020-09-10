@@ -1,0 +1,30 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "C/C++: aarch64-none-elf-gcc build active file",
+			"command": "/opt/devkitpro/devkitA64/bin/aarch64-none-elf-gcc",
+			"args": [
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}",
+				"-I${workspaceFolder}/inc",
+                "-I${DEVKITPRO}/libnx/include",
+                "-I${DEVKITPRO}/portlibs/switch/include",
+                "-I${DEVKITPRO}/devkitA64/aarch64-none-elf/include",
+                "-I${DEVKITPRO}/devkitA64/lib/gcc/aarch64-none-elf/10.2.0/include",
+                "-I/usr/include",
+                "-I/usr/include/x86_64-linux-gnu"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build"
+		}
+	]
+}
