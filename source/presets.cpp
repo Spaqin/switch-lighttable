@@ -4,8 +4,6 @@
 const int ScreenSettingsCount = 4;
 static ScreenSettings _presets[ScreenSettingsCount];
 
-extern ScreenSettings _current_settings;
-
 void presets_load()
 {
     //for now, only load defaults -- will load from file later
@@ -37,6 +35,7 @@ void preset_get(PresetPostition pos, ScreenSettings* out_setting)
 void preset_act(uint32_t actions)
 {
     PresetPostition pos = PRESET_POS_NONE;
+	ScreenSettings settings;
     switch(actions & (PRESET_UP | PRESET_DOWN | PRESET_LEFT | PRESET_RIGHT))
     {
     case PRESET_UP:
@@ -58,11 +57,13 @@ void preset_act(uint32_t actions)
     }
     if(actions & SET_PRESET_MODIFIER)
     {
-        preset_save(&_current_settings, pos);
+		current_settings_get(&settings);
+        preset_save(&settings, pos);
     }
     else
     {
-        preset_get(pos, &_current_settings);
+        preset_get(pos, &settings);
+		current_settings_set(&settings);
     }
     
 }

@@ -2,9 +2,9 @@
 #include "actions.h"
 
 
-bool _brightness_changed = false;
+static bool _brightness_changed = false;
 
-ScreenSettings _current_settings = {1.0f, 1.0f, 1.0f, 1.0f};
+static ScreenSettings _current_settings = {1.0f, 1.0f, 1.0f, 1.0f};
 
 /*
     receives current settings, e.g. for applying to screen, or saving to a preset.
@@ -12,7 +12,7 @@ ScreenSettings _current_settings = {1.0f, 1.0f, 1.0f, 1.0f};
     @returns - True if brightness was changed from the last time.
     ^ the logic behind that: don't overload the brightness module if it's not necessary, but OpenGL will need some data to render anyway so we don't care about that.
 */
-bool getCurrentScreenSettings(ScreenSettings* setting)
+bool current_settings_get(ScreenSettings* setting)
 {
     *setting = _current_settings;
     bool brightness_changed_temp = _brightness_changed;
@@ -24,7 +24,7 @@ bool getCurrentScreenSettings(ScreenSettings* setting)
     overwrites current settings, e.g. at init, or load from preset.
     @setting - pointer to ScreenSetting struct with new data.
 */
-void setCurrentScreenSettigns(ScreenSettings* setting)
+void current_settings_set(ScreenSettings* setting)
 {
     _current_settings = *setting;
     _brightness_changed = true; //even if it's the same, better safe than sorry...

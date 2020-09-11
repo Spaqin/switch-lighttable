@@ -17,13 +17,13 @@ typedef struct {
     @returns - True if brightness was changed from the last time.
     ^ the logic behind that: don't overload the brightness module if it's not necessary, but OpenGL will need some data to render anyway so we don't care about that.
 */
-bool getCurrentScreenSettings(ScreenSettings* setting);
+bool current_settings_get(ScreenSettings* setting);
 
 /*
     overwrites current settings, e.g. at init, or load from preset.
     @setting - pointer to ScreenSetting struct with new data.
 */
-void setCurrentScreenSettigns(ScreenSettings* setting);
+void current_settings_set(ScreenSettings* setting);
 
 /*
     Applies actions from given vector, if any are applicable, to the current settings.
