@@ -48,6 +48,10 @@ uint32_t get_actions()
     {
         action_vector |= TOGGLE_SETTINGS;
     }
+    if(KEY_MINUS & kDown)
+    {
+        action_vector |= EXIT;
+    }
 
     if((KEY_UP | KEY_DOWN | KEY_LEFT | KEY_RIGHT) & kUp) //any key released...
     {
@@ -79,5 +83,6 @@ uint32_t get_actions()
 
 void act(uint32_t actions)
 {
-
+    screen_settings_apply_action(actions);
+    preset_act(actions);
 }

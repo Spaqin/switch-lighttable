@@ -1,3 +1,6 @@
+#ifndef PRESETS_H
+#define PRESETS_H
+
 #include "scr_settings.h"
 #include "actions.h"
 #include <stdint.h>
@@ -15,3 +18,5 @@ void presets_load();
 void preset_save(ScreenSettings*, PresetPostition);
 void preset_get(PresetPostition, ScreenSettings*);
 void preset_act(uint32_t);
+
+#endif

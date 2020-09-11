@@ -1,6 +1,7 @@
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
 
+#include "scr_settings.h"
 #include <switch.h>
 
 #include <EGL/egl.h>    // EGL library
@@ -14,7 +15,7 @@ void setMesaConfig();
 
 GLuint createAndCompileShader(GLenum type, const char* source);
 void sceneInit();
-void sceneRender();
+void sceneRender(ScreenSettings*);
 void sceneExit();
 
 void swapBuffers();

@@ -292,14 +292,14 @@ void sceneInit()
     // glBindVertexArray(0);
 }
 
-void sceneRender()
+void sceneRender(ScreenSettings* settings)
 {
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClearColor(settings->red, settings->green, settings->blue, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
     // draw our first triangle
     glUseProgram(s_program);
-    glBindVertexArray(s_vao); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+    //glBindVertexArray(s_vao); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
     // glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 

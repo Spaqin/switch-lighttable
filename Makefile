@@ -6,6 +6,10 @@ ifeq ($(strip $(DEVKITPRO)),)
 $(error "Please set DEVKITPRO in your environment. export DEVKITPRO=<path to>/devkitpro")
 endif
 
+APP_AUTHOR := Spaqin
+APP_VERSION := 0.1
+APP_TITLE := Switch Lighttable
+
 TOPDIR ?= $(CURDIR)
 include $(DEVKITPRO)/libnx/switch_rules
 

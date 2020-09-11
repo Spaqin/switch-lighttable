@@ -2,6 +2,8 @@
 #define ACTIONS_H
 
 #include <stdint.h>
+#include "scr_settings.h"
+#include "presets.h"
 
 typedef enum {
     SET_BRIGHTNESS = 0x01,

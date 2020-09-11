@@ -33,9 +33,9 @@ void current_settings_set(ScreenSettings* setting)
 /*
     Applies actions from given vector, if any are applicable, to the current settings.
 */
-void apply_action(uint32_t action_vector)
+void screen_settings_apply_action(uint32_t action_vector)
 {
-    float modifier = 0.03f;
+    float modifier = 0.005f;
     if(DECREASE_MODIFIER & action_vector)
     {
         modifier = -modifier;
